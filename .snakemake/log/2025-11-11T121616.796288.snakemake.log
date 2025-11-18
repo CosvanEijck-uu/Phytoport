@@ -1,0 +1,3 @@
+ModuleNotFoundError in file "/home/coc/Projects/Internship/20252909_Thermomorphogenesis_translation_project/Processing/pipeline/Code/Snakefile", line 21:
+No module named 'torch'
+  File "/home/coc/Projects/Internship/20252909_Thermomorphogenesis_translation_project/Processing/pipeline/Code/Snakefile", line 21, in <module>

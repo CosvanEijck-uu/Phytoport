@@ -1,0 +1,65 @@
+Assuming unrestricted shared filesystem usage.
+host: coc
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 12
+Rules claiming more threads will be scaled down.
+Job stats:
+job              count
+-------------  -------
+boltz_predict        1
+total                1
+
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Nov 11 13:22:19 2025]
+localrule boltz_predict:
+    output: output/arabidopsis_thaliana_vs_solanum_lycopersicum/interactions/COP1_HY5_SPASTAR/boltz_results_interactions
+    jobid: 0
+    reason: Missing output files: output/arabidopsis_thaliana_vs_solanum_lycopersicum/interactions/COP1_HY5_SPASTAR/boltz_results_interactions
+    resources: tmpdir=/tmp
+Shell command: None
+Traceback (most recent call last):
+
+  File "/home/coc/.local/share/mise/installs/python/3.13.7/lib/python3.13/site-packages/snakemake/executors/local.py", line 232, in spawn_job
+    subprocess.check_call(cmd, shell=True)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+
+  File "/home/coc/.local/share/mise/installs/python/3.13.7/lib/python3.13/subprocess.py", line 419, in check_call
+    raise CalledProcessError(retcode, cmd)
+
+subprocess.CalledProcessError: Command 'cd /home/coc/Projects/Internship/20252909_Thermomorphogenesis_translation_project/Processing/pipeline/Code && /home/coc/.local/share/mise/installs/python/3.13.7/bin/python3.13 -m snakemake --snakefile '/home/coc/Projects/Internship/20252909_Thermomorphogenesis_translation_project/Processing/pipeline/Code/Snakefile' --target-jobs 'boltz_predict:' --allowed-rules boltz_predict --cores 12 --attempt 1 --force-use-threads  --force --target-files-omit-workdir-adjustment --max-inventory-time 0 --nocolor --no-hooks --nolock --ignore-incomplete --rerun-triggers params mtime code input software-env --conda-frontend 'conda' --shared-fs-usage source-cache storage-local-copies input-output software-deployment persistence sources --wrapper-prefix 'https://github.com/snakemake/snakemake-wrappers/raw/' --printshellcmds  --latency-wait 20 --scheduler 'ilp' --local-storage-prefix base64//LnNuYWtlbWFrZS9zdG9yYWdl --scheduler-solver-path '/home/coc/.local/share/mise/installs/python/3.13.7/bin' --runtime-source-cache-path '/home/coc/.cache/snakemake/snakemake/source-cache/runtime-cache/tmp8qh2ito7' --default-resources base64//dG1wZGlyPXN5c3RlbV90bXBkaXI= --quiet progress rules host --mode 'subprocess' --local-groupid 'local'' returned non-zero exit status 1.
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/home/coc/.local/share/mise/installs/python/3.13.7/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+
+  File "/home/coc/.local/share/mise/installs/python/3.13.7/lib/python3.13/site-packages/snakemake/executors/local.py", line 247, in cached_or_run
+    run_func(*args)
+    ~~~~~~~~^^^^^^^
+
+  File "/home/coc/.local/share/mise/installs/python/3.13.7/lib/python3.13/site-packages/snakemake/executors/local.py", line 234, in spawn_job
+    raise SpawnedJobError()
+
+snakemake.exceptions.SpawnedJobError
+
+[Tue Nov 11 13:22:23 2025]
+Error in rule boltz_predict:
+    message: None
+    jobid: 0
+    output: output/arabidopsis_thaliana_vs_solanum_lycopersicum/interactions/COP1_HY5_SPASTAR/boltz_results_interactions
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Tue Nov 11 13:22:23 2025]
+Error in rule boltz_predict:
+    message: None
+    jobid: 0
+    output: output/arabidopsis_thaliana_vs_solanum_lycopersicum/interactions/COP1_HY5_SPASTAR/boltz_results_interactions
+Complete log(s): /home/coc/Projects/Internship/20252909_Thermomorphogenesis_translation_project/Processing/pipeline/Code/.snakemake/log/2025-11-11T132217.931847.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

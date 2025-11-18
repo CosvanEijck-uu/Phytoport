@@ -1,0 +1,110 @@
+Assuming unrestricted shared filesystem usage.
+host: coc
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 12
+Rules claiming more threads will be scaled down.
+Job stats:
+job                                      count
+-------------------------------------  -------
+all                                          1
+check_expression                             1
+download_padding_proteomes                   1
+download_proteome_arabidopsis                1
+download_proteome_comparison_organism        1
+extract_targets                              1
+fetch_expression_data                        1
+run_orthofinder                              1
+summarize_interpro                           1
+summarize_musitedeep                         1
+total                                       10
+
+Select jobs to execute...
+Failed to solve scheduling problem with ILP solver, falling back to greedy scheduler. You likely have to fix your ILP solver installation. Error message: PULP_CBC_CMD: Not Available (check permissions on cbc)
+Execute 4 jobs...
+[Tue Nov 18 18:12:56 2025]
+localrule fetch_expression_data:
+    output: output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/barcodes.tsv.gz, output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/features.tsv.gz, output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/matrix.mtx.gz
+    jobid: 9
+    reason: Missing output files: output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/barcodes.tsv.gz, output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/features.tsv.gz, output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/matrix.mtx.gz
+    resources: tmpdir=/tmp
+Shell command: None
+[Tue Nov 18 18:12:56 2025]
+localrule download_proteome_arabidopsis:
+    output: output/arabidopsis_thaliana_vs_up000006548/arabidopsis_thaliana_proteome.fasta
+    jobid: 4
+    reason: Missing output files: output/arabidopsis_thaliana_vs_up000006548/arabidopsis_thaliana_proteome.fasta
+    resources: tmpdir=/tmp
+Shell command: 
+        python3 -m fetch.proteomes             --upid 'UP000006548'             --prefix 'arabidopsis_thaliana'             --output_dir output/arabidopsis_thaliana_vs_up000006548
+        
+[Tue Nov 18 18:12:56 2025]
+localrule download_proteome_comparison_organism:
+    output: output/arabidopsis_thaliana_vs_up000006548/up000006548_proteome.fasta
+    jobid: 5
+    reason: Missing output files: output/arabidopsis_thaliana_vs_up000006548/up000006548_proteome.fasta
+    resources: tmpdir=/tmp
+Shell command: 
+        python3 -m fetch.proteomes             --upid UP000006548             --prefix up000006548             --output_dir output/arabidopsis_thaliana_vs_up000006548
+        
+[Tue Nov 18 18:12:56 2025]
+localrule download_padding_proteomes:
+    output: output/arabidopsis_thaliana_vs_up000006548/solanum_tuberosum_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/brassica_oleracea_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/cucumis_melo_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/daucus_carota_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/nelumbo_nucifera_proteome.fasta
+    jobid: 6
+    reason: Missing output files: output/arabidopsis_thaliana_vs_up000006548/brassica_oleracea_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/solanum_tuberosum_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/nelumbo_nucifera_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/daucus_carota_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/cucumis_melo_proteome.fasta
+    resources: tmpdir=/tmp
+Shell command: 
+        python3 -m fetch.proteomes             --upid UP000011115 UP000032141 UP000321393 UP000077755 UP000189703             --prefix solanum_tuberosum brassica_oleracea cucumis_melo daucus_carota nelumbo_nucifera             --output_dir output/arabidopsis_thaliana_vs_up000006548
+        
+[Tue Nov 18 18:13:09 2025]
+Finished jobid: 4 (Rule: download_proteome_arabidopsis)
+1 of 10 steps (10%) done
+[Tue Nov 18 18:13:10 2025]
+Finished jobid: 5 (Rule: download_proteome_comparison_organism)
+2 of 10 steps (20%) done
+[Tue Nov 18 18:14:08 2025]
+Finished jobid: 6 (Rule: download_padding_proteomes)
+3 of 10 steps (30%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Nov 18 18:14:08 2025]
+localrule run_orthofinder:
+    input: output/arabidopsis_thaliana_vs_up000006548/arabidopsis_thaliana_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/up000006548_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/solanum_tuberosum_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/brassica_oleracea_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/cucumis_melo_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/daucus_carota_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/nelumbo_nucifera_proteome.fasta
+    output: output/arabidopsis_thaliana_vs_up000006548/homology/Orthologues/Orthologues_arabidopsis_thaliana_proteome/arabidopsis_thaliana_proteome__v__up000006548_proteome.tsv, output/arabidopsis_thaliana_vs_up000006548/homology/Resolved_Gene_Trees/Resolved_Gene_Trees.txt
+    jobid: 3
+    reason: Missing output files: output/arabidopsis_thaliana_vs_up000006548/homology/Orthologues/Orthologues_arabidopsis_thaliana_proteome/arabidopsis_thaliana_proteome__v__up000006548_proteome.tsv; Input files updated by another job: output/arabidopsis_thaliana_vs_up000006548/up000006548_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/brassica_oleracea_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/nelumbo_nucifera_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/solanum_tuberosum_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/daucus_carota_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/cucumis_melo_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/arabidopsis_thaliana_proteome.fasta
+    resources: tmpdir=/tmp
+Shell command: 
+        /opt/conda/bin/conda run -n of3_env orthofinder -f output/arabidopsis_thaliana_vs_up000006548
+        mkdir -p output/arabidopsis_thaliana_vs_up000006548/homology/
+        cp -r output/arabidopsis_thaliana_vs_up000006548/OrthoFinder/Results*/* output/arabidopsis_thaliana_vs_up000006548/homology/
+        rm -rf output/arabidopsis_thaliana_vs_up000006548/OrthoFinder/
+        
+[Tue Nov 18 18:14:46 2025]
+Finished jobid: 9 (Rule: fetch_expression_data)
+4 of 10 steps (40%) done
+Terminating processes on user request, this might take some time.
+RuleException:
+CalledProcessError in file "/workspace/Snakefile", line 347:
+Command 'set -euo pipefail;  
+        /opt/conda/bin/conda run -n of3_env orthofinder -f output/arabidopsis_thaliana_vs_up000006548
+        mkdir -p output/arabidopsis_thaliana_vs_up000006548/homology/
+        cp -r output/arabidopsis_thaliana_vs_up000006548/OrthoFinder/Results*/* output/arabidopsis_thaliana_vs_up000006548/homology/
+        rm -rf output/arabidopsis_thaliana_vs_up000006548/OrthoFinder/' returned non-zero exit status 1.
+[Tue Nov 18 18:14:58 2025]
+Error in rule run_orthofinder:
+    message: None
+    jobid: 3
+    input: output/arabidopsis_thaliana_vs_up000006548/arabidopsis_thaliana_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/up000006548_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/solanum_tuberosum_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/brassica_oleracea_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/cucumis_melo_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/daucus_carota_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/nelumbo_nucifera_proteome.fasta
+    output: output/arabidopsis_thaliana_vs_up000006548/homology/Orthologues/Orthologues_arabidopsis_thaliana_proteome/arabidopsis_thaliana_proteome__v__up000006548_proteome.tsv, output/arabidopsis_thaliana_vs_up000006548/homology/Resolved_Gene_Trees/Resolved_Gene_Trees.txt
+    shell:
+        
+        /opt/conda/bin/conda run -n of3_env orthofinder -f output/arabidopsis_thaliana_vs_up000006548
+        mkdir -p output/arabidopsis_thaliana_vs_up000006548/homology/
+        cp -r output/arabidopsis_thaliana_vs_up000006548/OrthoFinder/Results*/* output/arabidopsis_thaliana_vs_up000006548/homology/
+        rm -rf output/arabidopsis_thaliana_vs_up000006548/OrthoFinder/
+        
+        (command exited with non-zero exit code)
+Complete log(s): /home/coc/Projects/Internship/20252909_Thermomorphogenesis_translation_project/Processing/pipeline/Code/.snakemake/log/2025-11-18T181253.312190.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

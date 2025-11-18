@@ -1,0 +1,2 @@
+WorkflowError in file "/home/coc/Projects/Internship/20252909_Thermomorphogenesis_translation_project/Processing/pipeline/Code/Snakefile", line 30:
+Workflow defines configfile config.yaml but it is not present or accessible (full checked path: /home/coc/Projects/Internship/20252909_Thermomorphogenesis_translation_project/Processing/pipeline/Code/config.yaml).

@@ -1,0 +1,131 @@
+Assuming unrestricted shared filesystem usage.
+host: coc
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 12
+Rules claiming more threads will be scaled down.
+Job stats:
+job                                      count
+-------------------------------------  -------
+all                                          1
+check_expression                             1
+download_padding_proteomes                   1
+download_proteome_arabidopsis                1
+download_proteome_comparison_organism        1
+extract_targets                              1
+fetch_expression_data                        1
+run_orthofinder                              1
+summarize_interpro                           1
+summarize_musitedeep                         1
+total                                       10
+
+Select jobs to execute...
+Failed to solve scheduling problem with ILP solver, falling back to greedy scheduler. You likely have to fix your ILP solver installation. Error message: PULP_CBC_CMD: Not Available (check permissions on cbc)
+Execute 4 jobs...
+[Tue Nov 18 18:22:11 2025]
+localrule fetch_expression_data:
+    output: output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/barcodes.tsv.gz, output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/features.tsv.gz, output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/matrix.mtx.gz
+    jobid: 9
+    reason: Missing output files: output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/features.tsv.gz, output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/matrix.mtx.gz, output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/barcodes.tsv.gz
+    resources: tmpdir=/tmp
+Shell command: None
+[Tue Nov 18 18:22:11 2025]
+localrule download_proteome_arabidopsis:
+    output: output/arabidopsis_thaliana_vs_up000006548/arabidopsis_thaliana_proteome.fasta
+    jobid: 4
+    reason: Missing output files: output/arabidopsis_thaliana_vs_up000006548/arabidopsis_thaliana_proteome.fasta
+    resources: tmpdir=/tmp
+Shell command: 
+        python3 -m fetch.proteomes             --upid 'UP000006548'             --prefix 'arabidopsis_thaliana'             --output_dir output/arabidopsis_thaliana_vs_up000006548
+        
+[Tue Nov 18 18:22:11 2025]
+localrule download_proteome_comparison_organism:
+    output: output/arabidopsis_thaliana_vs_up000006548/up000006548_proteome.fasta
+    jobid: 5
+    reason: Missing output files: output/arabidopsis_thaliana_vs_up000006548/up000006548_proteome.fasta
+    resources: tmpdir=/tmp
+Shell command: 
+        python3 -m fetch.proteomes             --upid UP000006548             --prefix up000006548             --output_dir output/arabidopsis_thaliana_vs_up000006548
+        
+[Tue Nov 18 18:22:11 2025]
+localrule download_padding_proteomes:
+    output: output/arabidopsis_thaliana_vs_up000006548/solanum_tuberosum_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/brassica_oleracea_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/cucumis_melo_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/daucus_carota_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/nelumbo_nucifera_proteome.fasta
+    jobid: 6
+    reason: Missing output files: output/arabidopsis_thaliana_vs_up000006548/daucus_carota_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/brassica_oleracea_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/solanum_tuberosum_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/nelumbo_nucifera_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/cucumis_melo_proteome.fasta
+    resources: tmpdir=/tmp
+Shell command: 
+        python3 -m fetch.proteomes             --upid UP000011115 UP000032141 UP000321393 UP000077755 UP000189703             --prefix solanum_tuberosum brassica_oleracea cucumis_melo daucus_carota nelumbo_nucifera             --output_dir output/arabidopsis_thaliana_vs_up000006548
+        
+Terminating processes on user request, this might take some time.
+RuleException:
+CalledProcessError in file "/workspace/Snakefile", line 298:
+Command 'set -euo pipefail;  
+        python3 -m fetch.proteomes             --upid UP000006548             --prefix up000006548             --output_dir output/arabidopsis_thaliana_vs_up000006548' died with <Signals.SIGINT: 2>.
+[Tue Nov 18 18:22:18 2025]
+Error in rule download_proteome_comparison_organism:
+    message: None
+    jobid: 5
+    output: output/arabidopsis_thaliana_vs_up000006548/up000006548_proteome.fasta
+    shell:
+        
+        python3 -m fetch.proteomes             --upid UP000006548             --prefix up000006548             --output_dir output/arabidopsis_thaliana_vs_up000006548
+        
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/workspace/Snakefile", line 323:
+Command 'set -euo pipefail;  
+        python3 -m fetch.proteomes             --upid UP000011115 UP000032141 UP000321393 UP000077755 UP000189703             --prefix solanum_tuberosum brassica_oleracea cucumis_melo daucus_carota nelumbo_nucifera             --output_dir output/arabidopsis_thaliana_vs_up000006548' died with <Signals.SIGINT: 2>.
+[Tue Nov 18 18:22:18 2025]
+Error in rule download_padding_proteomes:
+    message: None
+    jobid: 6
+    output: output/arabidopsis_thaliana_vs_up000006548/solanum_tuberosum_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/brassica_oleracea_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/cucumis_melo_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/daucus_carota_proteome.fasta, output/arabidopsis_thaliana_vs_up000006548/nelumbo_nucifera_proteome.fasta
+    shell:
+        
+        python3 -m fetch.proteomes             --upid UP000011115 UP000032141 UP000321393 UP000077755 UP000189703             --prefix solanum_tuberosum brassica_oleracea cucumis_melo daucus_carota nelumbo_nucifera             --output_dir output/arabidopsis_thaliana_vs_up000006548
+        
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/workspace/Snakefile", line 284:
+Command 'set -euo pipefail;  
+        python3 -m fetch.proteomes             --upid 'UP000006548'             --prefix 'arabidopsis_thaliana'             --output_dir output/arabidopsis_thaliana_vs_up000006548' died with <Signals.SIGINT: 2>.
+[Tue Nov 18 18:22:18 2025]
+Error in rule download_proteome_arabidopsis:
+    message: None
+    jobid: 4
+    output: output/arabidopsis_thaliana_vs_up000006548/arabidopsis_thaliana_proteome.fasta
+    shell:
+        
+        python3 -m fetch.proteomes             --upid 'UP000006548'             --prefix 'arabidopsis_thaliana'             --output_dir output/arabidopsis_thaliana_vs_up000006548
+        
+        (command exited with non-zero exit code)
+Traceback (most recent call last):
+
+  File "/opt/conda/envs/bioenv/lib/python3.11/site-packages/snakemake/executors/local.py", line 232, in spawn_job
+
+  File "/opt/conda/envs/bioenv/lib/python3.11/subprocess.py", line 413, in check_call
+
+subprocess.CalledProcessError: Command 'cd /home/coc/Projects/Internship/20252909_Thermomorphogenesis_translation_project/Processing/pipeline/Code && /opt/conda/envs/bioenv/bin/python3.11 -m snakemake --snakefile '/workspace/Snakefile' --target-jobs 'fetch_expression_data:' --allowed-rules fetch_expression_data --cores 12 --attempt 1 --force-use-threads  --force --target-files-omit-workdir-adjustment --max-inventory-time 0 --nocolor --no-hooks --nolock --ignore-incomplete --rerun-triggers software-env input code params mtime --conda-frontend 'conda' --shared-fs-usage software-deployment sources persistence storage-local-copies source-cache input-output --wrapper-prefix 'https://github.com/snakemake/snakemake-wrappers/raw/' --printshellcmds  --latency-wait 20 --scheduler 'ilp' --local-storage-prefix base64//LnNuYWtlbWFrZS9zdG9yYWdl --scheduler-solver-path '/opt/conda/envs/bioenv/bin' --runtime-source-cache-path '/home/coc/.cache/snakemake/snakemake/source-cache/runtime-cache/tmpqkabpc0z' --default-resources base64//dG1wZGlyPXN5c3RlbV90bXBkaXI= --quiet progress rules host --mode 'subprocess' --local-groupid 'local'' died with <Signals.SIGINT: 2>.
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/opt/conda/envs/bioenv/lib/python3.11/concurrent/futures/thread.py", line 58, in run
+
+  File "/opt/conda/envs/bioenv/lib/python3.11/site-packages/snakemake/executors/local.py", line 247, in cached_or_run
+
+  File "/opt/conda/envs/bioenv/lib/python3.11/site-packages/snakemake/executors/local.py", line 234, in spawn_job
+
+snakemake.exceptions.SpawnedJobError
+
+[Tue Nov 18 18:22:20 2025]
+Error in rule fetch_expression_data:
+    message: None
+    jobid: 9
+    output: output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/barcodes.tsv.gz, output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/features.tsv.gz, output/arabidopsis_thaliana_vs_up000006548/expression/GSM8995007/matrix.mtx.gz
+Complete log(s): /home/coc/Projects/Internship/20252909_Thermomorphogenesis_translation_project/Processing/pipeline/Code/.snakemake/log/2025-11-18T182208.099275.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.
