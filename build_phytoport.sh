@@ -115,9 +115,8 @@ echo "✅ Installation and data setup complete! The pipeline is ready to run."
 echo "--------------------------------------------------------"
 echo "To run your pipeline, use the following command structure:"
 echo ""
-echo '# 1. Define the host path for results (this points to a folder named "Results" one directory up):'
-echo 'HOST_RESULTS="$(pwd)/../Results/"'
-echo 'mkdir -p ${HOST_RESULTS} # Create the output directory first'
+echo '# 1. Define the host path for results:'
+echo 'HOST_RESULTS="$(pwd)/"'
 echo ""
 echo '# 2. Run the SIF, binding the extracted data and your results directory:'
 echo "apptainer run \\"

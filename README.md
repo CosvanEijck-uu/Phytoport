@@ -6,13 +6,9 @@ PhytoPort is a bioinformatics pipeline for **cross-species protein analysis**. I
 
 ## 🛠️ Pipeline Execution & Environment
 
-The pipeline is primarily managed using **Snakemake** and distributed via **Docker** or **Singularity**.
+The pipeline is primarily managed using **Snakemake** and distributed via **Apptainer** or **local installation**.
 
-  * `0_README.md`: General overview and main entry point documentation.
-  * `Snakefile`: Defines the entire workflow structure, dependencies, and rules for execution.
-  * `requirements.txt`: Lists the Python dependencies.
-  * `installed_packages.csv`: Tracks the installed non-Python dependencies.
-  * `Dockerfile`: Defines the Docker container environment for the pipeline.
+  * `README.md`: General overview and main entry point documentation.
   * `phytoport.sif`: The Singularity Image Format file for container execution.
 
 ### Shell Scripts
@@ -22,7 +18,6 @@ The pipeline is primarily managed using **Snakemake** and distributed via **Dock
 | `initialyse.sh` | **Main wrapper script** that provides a CLI. It prompts the user for the **comparison organism** (by name/UPID), **target proteins**, and **structure prediction targets**. It generates `config.yaml` and executes the pipeline via the `Snakefile`. |
 | `entrypoint.sh` | Configures the **Docker entry point**. Handles container startup, volume mounting, and initiates the pipeline execution. |
 | `build_phytoport.sh` | Checks for Docker, builds the PhytoPort Docker image, and ensures proper volume mounting and configuration. |
-| `update_and_run_phytoport.sh` | Script for updating and re-running the pipeline. |
 | `run_boltz2.sh` | Sets up and runs **Boltz-2** deep-learning protein structure predictions. Allows users to optionally restrict targets and updates `config.yaml` before launching the Snakemake workflow. |
 | `input_utils.sh` | Utility functions for parsing, validating, and preparing input files for the pipeline. |
 
@@ -74,7 +69,6 @@ The pipeline's core functionality is organized into modular Python packages: `fe
 ## 🧪 Testing
 
   * The pipeline has been validated through a **full case study execution**.
-  * The `unittests` directory contains individual Python files (`test_fetch_*.py`) to verify the correct execution of individual functions within the `fetch` module.
 
 -----
 
@@ -100,9 +94,4 @@ The pipeline's core functionality is organized into modular Python packages: `fe
     bash build_phytoport.sh
     ```
 
-4.  Execute the main initialization script:
-
-    ```bash
-    bash initialyse.sh
-    ```
-
+4.  Execute the command printed in the commandline
