@@ -94,4 +94,10 @@ The pipeline's core functionality is organized into modular Python packages: `fe
     bash build_phytoport.sh
     ```
 
-4.  Execute the command printed in the commandline
+4.  Run the execution script to run the image (This mounts the correct directories 🙂):
+
+```bash
+    bash run_phytoport.sh
+```
+
+
