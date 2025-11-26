@@ -80,13 +80,18 @@ step2_get_geo_id() {
 # -----------------------------
 step3_get_target_proteins() {
     while true; do
-        read -p "Enter target proteins separated by spaces (e.g., HY5 SPA* COP1): " -a target_proteins
+        prompt_input "Enter target proteins separated by spaces (e.g., HY5 SPA* COP1): " target_input false
+
+        # Split into array
+        read -r -a target_proteins <<< "$target_input"
+
         if [ ${#target_proteins[@]} -gt 0 ]; then
             break
         fi
         echo "You must enter at least one target protein."
     done
 
+    # Normalize to uppercase
     for i in "${!target_proteins[@]}"; do
         target_proteins[i]=$(echo "${target_proteins[$i]}" | tr '[:lower:]' '[:upper:]')
     done
