@@ -75,10 +75,15 @@ The pipeline's core functionality is organized into modular Python packages: `fe
 ## 📚 External Dependencies & Resources
 
   * **OrthoFinder:** [Installation Guide](https://github.com/OrthoFinder/OrthoFinder?tab=readme-ov-file#installation)
+    - Reference: Emms, D. M., Liu, Y., Belcher, L., Holmes, J., & Kelly, S. (2025). OrthoFinder: Scalable phylogenetic orthology inference for comparative genomics (p. 2025.07.15.664860). bioRxiv. https://doi.org/10.1101/2025.07.15.664860
   * **InterProScan:** [Documentation](https://interpro-documentation.readthedocs.io/en/latest/interproscan.html)
+    - Reference: Jones, P., Binns, D., Chang, H.-Y., Fraser, M., Li, W., McAnulla, C., McWilliam, H., Maslen, J., Mitchell, A., Nuka, G., Pesseat, S., Quinn, A. F., Sangrador-Vegas, A., Scheremetjew, M., Yong, S.-Y., Lopez, R., & Hunter, S. (2014). InterProScan 5: Genome-scale protein function classification. Bioinformatics, 30(9), 1236–1240. https://doi.org/10.1093/bioinformatics/btu031
   * **MusiteDeep:** [GitHub Repository](https://github.com/duolinwang/MusiteDeep)
+    - Reference: Wang, D., Zeng, S., Xu, C., Qiu, W., Liang, Y., Joshi, T., & Xu, D. (2017). MusiteDeep: A deep-learning framework for general and kinase-specific phosphorylation site prediction. Bioinformatics (Oxford, England), 33(24), 3909–3916. https://doi.org/10.1093/bioinformatics/btx496
   * **Boltz-2:** [GitHub Repository](https://github.com/jwohlwend/boltz/tree/main) (Used for structure prediction)
+    - Reference: Passaro, S., Corso, G., Wohlwend, J., Reveiz, M., Thaler, S., Somnath, V. R., Getz, N., Portnoi, T., Roy, J., Stark, H., Kwabi-Addo, D., Beaini, D., Jaakkola, T., & Barzilay, R. (2025). Boltz-2: Towards Accurate and Efficient Binding Affinity Prediction (p. 2025.06.14.659707). bioRxiv. https://doi.org/10.1101/2025.06.14.659707
   * **Seurat:** [Documentation](https://satijalab.org/seurat/) (Used for gene expression analysis, likely in conjunction with GEO data).
+    - Reference: Gribov, A., Sill, M., Lück, S., Rücker, F., Döhner, K., Bullinger, L., Benner, A., & Unwin, A. (2010). SEURAT: Visual analytics for the integrated analysis of microarray data. BMC Medical Genomics, 3(1), 21. https://doi.org/10.1186/1755-8794-3-21
 
 -----
 

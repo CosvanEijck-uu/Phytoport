@@ -1,53 +1,35 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
 
-echo
-echo "===================================================="
-echo "     ⚛️  Boltz-2 Structure Prediction Stage"
-echo "===================================================="
-echo
-echo "This step performs deep-learning-based protein structure predictions."
-echo "⚠️  It is computationally intensive and may take a long time, even on GPU-enabled systems."
-echo
+### ---------------------------------------------------------
+###  1. Resolve absolute host paths (critical for Apptainer)
+### ---------------------------------------------------------
+# Results directory (same as Docker bind)
+HOST_RESULTS="$(readlink -f ../Results)"
+mkdir -p "$HOST_RESULTS"
 
-config_file="config.yaml"
+# InterProScan extracted folder on the host
+HOST_CACHE_DIR="$(pwd)/.interproscan_cache"
+IPR_ACTUAL_HOST_DIR_NAME="interproscan-5.75-106.0"
+HOST_IPR_DATA="${HOST_CACHE_DIR}/${IPR_ACTUAL_HOST_DIR_NAME}"
 
-if [ ! -f "$config_file" ]; then
-    echo "❌ Error: $config_file not found. Please run the main PhytoPort pipeline first."
+if [ ! -d "$HOST_IPR_DATA" ]; then
+    echo "❌ ERROR: InterProScan data not found at $HOST_IPR_DATA"
+    echo "Please extract it first."
     exit 1
 fi
 
-# Load target proteins from config
-target_proteins=$(yq '.target_proteins | join(" ")' "$config_file")
+# Container paths (fixed, matches your Snakemake scripts)
+CONTAINER_IPR_PATH="/opt/interproscan/interproscan-5.75-106.0-64-bit"
+CONTAINER_OUTPUT_PATH="/workspace/output"
 
-echo "Detected target proteins from main pipeline:"
-echo "$target_proteins"
-echo
-
-# Let user choose structure proteins (default = same as targets)
-read -p "Would you like to restrict structure prediction to a subset? [y/N]: " subset
-if [[ "$subset" =~ ^[Yy]$ ]]; then
-    read -p "Enter subset of proteins separated by spaces: " -a subset_proteins
-    echo "Using subset: ${subset_proteins[*]}"
-
-    # Convert bash array to YAML list string
-    inline_subset="["
-    for el in "${subset_proteins[@]}"; do
-        inline_subset+="\"$el\", "
-    done
-    inline_subset="${inline_subset%, }]"  # Remove trailing comma
-
-    # Update YAML in-place with yq v4+
-    yq -i -y ".structure_proteins = $inline_subset" "$config_file"
-else
-    # Copy target_proteins to structure_proteins
-    yq -i -y ".structure_proteins = .target_proteins" "$config_file"
-fi
-
-echo
-echo "✅ Updated structure_proteins in config.yaml:"
-yq -y '.structure_proteins' "$config_file"
-echo
-
-echo "Starting Boltz-2 Snakemake workflow..."
-snakemake --snakefile ./Snakefile --cores all --printshellcmds --latency-wait 20 boltz_predict
+### ---------------------------------------------------------
+###  2. Run Apptainer with Docker-equivalent behavior
+### ---------------------------------------------------------
+apptainer exec \
+    --bind "${HOST_RESULTS}:${CONTAINER_OUTPUT_PATH}" \
+    --bind "${HOST_IPR_DATA}:${CONTAINER_IPR_PATH}" \
+    --pwd /workspace \
+    --writable-tmpfs \
+    phytoport.sif \
+    bash run_boltz2.sh
