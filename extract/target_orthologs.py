@@ -114,6 +114,9 @@ def main(args: argparse.Namespace) -> None:
     """
     Extract target orthologs and save to output TSV.
 
+    This version only checks the *Arabidopsis thaliana* column (second column)
+    for matching target symbols.
+
     Parameters
     ----------
     args : argparse.Namespace
@@ -130,8 +133,9 @@ def main(args: argparse.Namespace) -> None:
     try:
         output_path.parent.mkdir(parents=True, exist_ok=True)
     except Exception as e:
-        raise RuntimeError(f"Failed to create output directory ' \
-        {output_path.parent}': {e}")
+        raise RuntimeError(
+            f"Failed to create output directory '{output_path.parent}': {e}"
+        )
 
     try:
         organism_names = get_organism_names(input_file)
@@ -153,19 +157,23 @@ def main(args: argparse.Namespace) -> None:
                 try:
                     orthogroup, columns = parse_line(line)
                 except Exception as e:
-                    print(f"Skipping line {line_number} due to parse error: \
-                    {e}", file=sys.stderr)
+                    print(f"Skipping line {line_number} due to parse error: {e}",
+                          file=sys.stderr)
                     continue
 
-                # Check if any gene in any column matches a target symbol
+                if not columns:
+                    continue
+
+                arabidopsis_column = columns[0]  # column 2 of TSV
+
                 if any(
-                    match_symbol(extract_symbol(gene), targets)
-                    for col in columns
-                    for gene in col
+                        match_symbol(extract_symbol(gene), targets)
+                        for gene in arabidopsis_column
                 ):
                     all_cols = [";".join(col) for col in columns]
-                    out_file.write(orthogroup + "\t" +
-                                   "\t".join(all_cols) + "\n")
+                    out_file.write(
+                        orthogroup + "\t" + "\t".join(all_cols) + "\n"
+                    )
 
         print(f"Results successfully saved to {output_path}")
 
@@ -177,7 +185,8 @@ def main(args: argparse.Namespace) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Extract target orthologs from an OrthoFinder TSV."
+        description="Extract target orthologs from an OrthoFinder TSV "
+                    "(checking only Arabidopsis thaliana column)."
     )
     parser.add_argument("file", help="Path to input TSV file")
     parser.add_argument(
