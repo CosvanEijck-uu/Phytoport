@@ -23,6 +23,7 @@ fi
 CONTAINER_IPR_PATH="/opt/interproscan/interproscan-5.75-106.0-64-bit"
 CONTAINER_OUTPUT_PATH="/workspace/output"
 
+
 ### ---------------------------------------------------------
 ###  2. Run Apptainer with Docker-equivalent behavior
 ### ---------------------------------------------------------
